@@ -6,20 +6,37 @@
 <title>🌳 Emoji Deforestation RPG — v9</title>
 <style>
  :root {
-  --bg:#FEFEFC;        /* Background */
-  --panel:#FFFFFF;     /* Panel / card */
-  --ink:#042E21;       /* Primary text */
-  --muted:#6B8A7C;     /* Secondary text (softer greenish) */
-  --accent:#319175;    /* Ramo accent */
-  --warn:#E3B341;      /* Yellow/warning */
-  --bad:#E2564A;       /* Error/red */
-  --good:#38C9A5;      /* Success/teal */
-  --tile:3.2rem;
-  --gap:.25rem;
+  /* Brand base */
+  --bg:#FEFEFC;
+  --panel:#FFFFFF;
+  --ink:#042E21;
+  --muted:#6B8A7C;
+  --accent:#319175;
+  --warn:#E3B341;
+  --bad:#E2564A;
+  --good:#38C9A5;
+
+  /* Tile palette */
+  --tile-forest:#CDE5D7;
+  --tile-edge:#B5DAC9;
+  --tile-clear:#F1E3D4;
+  --tile-farm:#EAE6C7;
+  --tile-char:#E2C4C4;
+  --tile-replant:#D2E5D7;
+  --tile-firebreak:#E0E2E8;
+  --tile-vill:#EAE4EC;
+  --tile-hut:#E4DEE9;
+  --tile-burn:#F4C7C1;
+
+  /* UI */
+  --dialog-bg:#FFFFFF;
+  --dialog-border:#319175;
+  --trend-bg:#FEFEFC;
+  --trend-border:#319175;
 }
   html,body{height:100%}
   body{margin:0;background:linear-gradient(180deg,#0a0d12,#121824 40%,#0a0d12);color:var(--ink);font:16px/1.4 "Press Start 2P", ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace}
-  @font-face{font-family:'Press Start 2P';src:local('Courier New')}
+  @font-face{font-family:'Press Start 2P';src:local('Helvetica')}
   .app{display:grid;grid-template-columns:380px 1fr;gap:1rem;height:100%}
   .left{background:var(--panel);padding:14px;border-right:2px solid #1f2633;display:flex;flex-direction:column;overflow:auto}
   .right{display:flex;flex-direction:column}
@@ -48,24 +65,35 @@
   .board{display:grid;grid-template-columns:repeat(var(--w), var(--tile));grid-auto-rows:var(--tile);gap:var(--gap);background:#0a0f18;padding:.5rem;border:2px solid #1f2633;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.3)}
   .tile{width:var(--tile);height:var(--tile);display:grid;place-items:center;border-radius:10px;border:1px solid #1f2633;font-size:1.6rem;user-select:none;position:relative}
   /* Clearer backgrounds by type */
-  .tile.t-forest{background:#0e2016}
-  .tile.t-edge{background:#163421; box-shadow:0 0 0 2px #39d98a inset}
-  .tile.t-clear{background:#2e1f12}
-  .tile.t-farm{background:#2f2f15}
-  .tile.t-char{background:#331616}
-  .tile.t-replant{background:#123122}
-  .tile.t-firebreak{background:#232733}
-  .tile.t-vill{background:#25202c}
-  .tile.t-hut{background:#2a2330}
-  .tile.t-burn{background:#4a1610; box-shadow:0 0 0 2px #ff4d2e inset}
-  .tile .flag{position:absolute;right:2px;bottom:2px;font-size:.95rem;opacity:.95}
-  .badge{position:absolute;left:2px;top:2px;font-size:.9rem;opacity:.9}
-  .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.6)}
-  .modal.show{display:flex}
-  .dialog{width:min(960px,92vw);background:#0c1320;border:2px solid #2a3347;border-radius:18px;padding:14px}
-  .edge{color:#89d16b}
-  .hint{font-size:11px;color:#9fb0c1}
-  canvas#trend{width:100%;height:180px;background:#0a0f18;border:1px solid #1f2633;border-radius:10px}
+  /* Tiles */
+.tile.t-forest   { background:var(--tile-forest); }
+.tile.t-edge     { background:var(--tile-edge); box-shadow:0 0 0 2px var(--accent) inset; }
+.tile.t-clear    { background:var(--tile-clear); }
+.tile.t-farm     { background:var(--tile-farm); }
+.tile.t-char     { background:var(--tile-char); }
+.tile.t-replant  { background:var(--tile-replant); }
+.tile.t-firebreak{ background:var(--tile-firebreak); }
+.tile.t-vill     { background:var(--tile-vill); }
+.tile.t-hut      { background:var(--tile-hut); }
+.tile.t-burn     { background:var(--tile-burn); box-shadow:0 0 0 2px var(--bad) inset; }
+
+.tile .flag { position:absolute;right:2px;bottom:2px;font-size:.95rem;opacity:.95 }
+.badge      { position:absolute;left:2px;top:2px;font-size:.9rem;opacity:.9 }
+
+/* Modals & dialogs */
+.modal      { position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+              background:rgba(0,0,0,.6) }
+.modal.show { display:flex }
+.dialog     { width:min(960px,92vw);background:var(--dialog-bg);border:2px solid var(--dialog-border);
+              border-radius:18px;padding:14px;color:var(--ink); }
+
+/* Text & hints */
+.edge       { color:var(--accent); }
+.hint       { font-size:11px;color:var(--muted); }
+
+/* Chart */
+canvas#trend{ width:100%;height:180px;background:var(--trend-bg);border:1px solid var(--trend-border);
+              border-radius:10px }
   /* scrollable step log */
   .log{height:240px; overflow:auto;}
 </style>

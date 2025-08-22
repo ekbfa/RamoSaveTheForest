@@ -32,11 +32,10 @@
     </div>
   </header>
 
-  <!-- App Layout -->
+<!-- App -->
   <main class="app" id="app" role="main">
     <!-- Left Sidebar -->
     <aside class="left">
-      <!-- Simulation controls -->
       <section class="card" aria-labelledby="sim-title">
         <h3 id="sim-title">⚙️ Simulation</h3>
         <label for="ticksPer">Ticks / period</label>
@@ -44,13 +43,11 @@
           <input id="ticksPer" type="range" min="4" max="20" value="8" aria-describedby="ticksLbl" />
           <span id="ticksLbl">8</span>
         </div>
-
         <label for="spawnRate">Spawn rate (👶)</label>
         <div>
           <input id="spawnRate" type="range" min="0" max="10" value="2" aria-describedby="spawnLbl" />
           <span id="spawnLbl">2</span>
         </div>
-
         <div class="actions" aria-label="Simulation actions">
           <button type="button" class="btn" id="btnTick">▶️ Tick</button>
           <button type="button" class="btn good" id="btnRun">⏩ Run period</button>
@@ -58,7 +55,6 @@
         </div>
       </section>
 
-      <!-- Tools -->
       <section class="card" aria-labelledby="tools-title">
         <h3 id="tools-title">🧰 Click Tools (each costs capital)</h3>
         <div class="tool-list">
@@ -71,7 +67,6 @@
         <p class="hint">Click a tool to toggle it <em>on</em>. Click again to turn it off.</p>
       </section>
 
-      <!-- Legend -->
       <section class="card" aria-labelledby="legend-title">
         <h3 id="legend-title">📜 Legend</h3>
         <div class="legend" aria-label="Legend">
@@ -80,27 +75,24 @@
         </div>
       </section>
 
-      <!-- Goals -->
       <section class="card" aria-labelledby="goals-title">
         <h3 id="goals-title">🎯 Goals</h3>
         <p class="hint">Lose if 🌲 &lt;20% or 🌾 &lt;30% for 3 consecutive periods. Win: keep 🌲 &gt;40% after 10 years with growing 💰 community.</p>
       </section>
 
-      <!-- Tests -->
       <section class="card" aria-labelledby="tests-title">
         <h3 id="tests-title">🧪 Tests</h3>
         <div class="hint" id="testbar">Will run on load…</div>
       </section>
     </aside>
 
-    <!-- Right Content -->
+    <!-- Center + Right -->
     <section class="right">
       <div class="boardWrap">
-        <!-- Game board -->
         <div id="board" class="board" role="grid" aria-label="Game board"></div>
 
-        <!-- Side panel: summary, trends, log -->
-        <div class="sidepanel" style="min-width:360px;display:flex;flex-direction:column;gap:.6rem">
+        <!-- Fixed right panel -->
+        <div class="sidepanel">
           <section class="card" aria-labelledby="summary-title">
             <h3 id="summary-title">📈 Period Summary</h3>
             <div id="summary">—</div>
@@ -122,53 +114,46 @@
   </main>
 
   <!-- Council Modal -->
-  <div class="modal" id="councilModal" role="dialog" aria-modal="true" aria-labelledby="council-title" hidden>
+  <div class="modal" id="councilModal" role="dialog" aria-modal="true" aria-labelledby="council-title">
     <div class="dialog">
       <h2 id="council-title">🏛️ Period Council — Interventions (spend capitals)</h2>
 
-      <div class="council" style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
+      <div class="council">
         <div class="card" style="margin:0">
           <b>📜 Land Tenure</b>
           <div class="hint">Cost: 🏛️2 + 🫱1. Enables consolidation & value chains.</div>
           <button type="button" class="btn" data-action="tenure">Launch</button>
         </div>
-
         <div class="card" style="margin:0">
           <b>🌾 Value Chains</b>
           <div class="hint">Cost: 🫱2 + 💰25. Convert 3 👨‍🌾 to high-value farmers.</div>
           <button type="button" class="btn" data-action="valueChains">Introduce</button>
         </div>
-
         <div class="card" style="margin:0">
           <b>🌾 Consolidate Farms</b>
           <div class="hint">Cost: 🫱2 + 🏛️1. Requires Tenure.</div>
           <button type="button" class="btn" data-action="consolidate">Apply</button>
         </div>
-
         <div class="card" style="margin:0">
           <b>🧑‍🌱 Guardians (x3)</b>
           <div class="hint">Cost: 💰40. Patrol, replant, fight fires, deter.</div>
           <button type="button" class="btn" data-action="guardians">Hire</button>
         </div>
-
         <div class="card" style="margin:0">
           <b>🚧 Firebreak Network</b>
           <div class="hint">Cost: 💰25 + 🫱1. Slows edge/fire spread.</div>
           <button type="button" class="btn" data-action="firebreaks">Build</button>
         </div>
-
         <div class="card" style="margin:0">
           <b>💵 Pay-to-Not-Cut (ER)</b>
           <div class="hint">Cost: 💰20. 30% fewer cuts next period. Earn 10💰 (+1🫱).</div>
           <button type="button" class="btn" data-action="er">Start</button>
         </div>
-
         <div class="card" style="margin:0">
           <b>🌱 Replanting Drive</b>
           <div class="hint">Cost: 💰30. Convert 8 🟫 → 🌱 → 🌲 (+15💰 later).</div>
           <button type="button" class="btn" data-action="replantDrive">Plant</button>
         </div>
-
         <div class="card" style="margin:0">
           <b>🧑‍💼 Entrepreneur Shift</b>
           <div class="hint">Cost: 💰20. 1 🧑‍💼 funds guardians instead of cutters.</div>
@@ -176,13 +161,12 @@
         </div>
       </div>
 
-      <div class="actions" style="display:flex;justify-content:flex-end;gap:.5rem;margin-top:.6rem">
+      <div class="actions">
         <button type="button" class="btn" id="closeCouncil">Done</button>
       </div>
     </div>
   </div>
 
-  <!-- Scripts -->
   <script src="/game.js" defer></script>
 </body>
 </html>

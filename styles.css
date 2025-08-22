@@ -1,6 +1,6 @@
-/* =============== THEME / BRAND VARIABLES =============== */
+/* =============== THEME / BRAND =============== */
 :root {
-  /* Brand base */
+  /* Brand */
   --bg:#FEFEFC; --panel:#FFFFFF; --ink:#042E21; --muted:#6B8A7C;
   --accent:#319175; --warn:#E3B341; --bad:#E2564A; --good:#38C9A5;
 
@@ -9,7 +9,7 @@
   --left-w:  clamp(280px, 25vw, 420px);
   --right-w: clamp(320px, 25vw, 480px);
 
-  /* Tile palette */
+  /* Tiles */
   --tile-forest:#CDE5D7; --tile-edge:#B5DAC9; --tile-clear:#F1E3D4; --tile-farm:#EAE6C7;
   --tile-char:#E2C4C4; --tile-replant:#D2E5D7; --tile-firebreak:#E0E2E8;
   --tile-vill:#EAE4EC; --tile-hut:#E4DEE9; --tile-burn:#F4C7C1;
@@ -48,108 +48,59 @@ header{
   border-bottom:1px solid var(--line);background:var(--panel);height:var(--header-h);
 }
 .title{font-size:16px;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
-.logo{height:24px;vertical-align:middle}
-
-/* =============== HUD PILLS =============== */
 .hud{display:flex;gap:.5rem;align-items:center;margin-left:auto;flex-wrap:wrap}
 .pill{padding:.25rem .5rem;border-radius:999px;background:var(--pill-bg);border:1px solid var(--pill-line);font-size:12px}
 .pill.red{background:var(--danger-bg);border-color:var(--danger-line);color:#8D2B22}
 
-/* =============== LAYOUT (fixed left & right panels) =============== */
-
-/* Remove the grid; reserve space for fixed sidebars with padding */
+/* =============== LAYOUT (fixed left & right) =============== */
 .app{
-  display:block;
   height: calc(100vh - var(--header-h));
   padding-left:  calc(var(--left-w)  + 1rem);
   padding-right: calc(var(--right-w) + 1rem);
-  /* Optional: keep some gap to the header edge for the center area */
 }
 
-/* LEFT sidebar — fixed to the left */
+/* Left sidebar — fixed */
 .left{
-  position: fixed;
-  top: var(--header-h);
-  left: 0;
-  bottom: 0;
-  width: var(--left-w);
-
+  position: fixed; top: var(--header-h); left: 0; bottom: 0; width: var(--left-w);
   background: var(--panel);
   padding: 14px;
   border-right: 1px solid var(--line-soft);
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-  z-index: 20;
+  display:flex; flex-direction:column;
+  overflow:auto;
+  z-index:20;
 }
 
-/* RIGHT column container (center area) */
-.right{
-  height: 100%;
-  overflow: hidden;           /* prevent double scrollbars */
-  padding: 1rem;
-}
+/* Center container */
+.right{ height:100%; overflow:hidden; padding:1rem; }
 
-/* Center content scroller (board + whatever you keep inside) */
+/* Center scroller (board area) */
 .boardWrap{
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  overflow: auto;             /* the center area scrolls */
+  height:100%;
+  display:flex; flex-direction:column; gap:1rem;
+  overflow:auto; padding:1rem;
 }
 
-/* RIGHT panel — fixed to the right (summary / trends / log) */
+/* Right panel — fixed */
 .sidepanel{
-  position: fixed;
-  top: var(--header-h);
-  right: 0;
-  bottom: 0;
-  width: var(--right-w);
-
-  /* Neutralize your inline min-width from HTML if present */
+  position: fixed; top: var(--header-h); right: 0; bottom: 0; width: var(--right-w);
   min-width: 0 !important;
-
-  display: flex;
-  flex-direction: column;
-  gap: .6rem;
-  overflow: auto;
-
-  padding: 1rem .75rem 1rem 1rem;
-  border-left: 1px solid var(--line-soft);
-  background: transparent;    /* cards have their own bg */
-  z-index: 15;
+  display:flex; flex-direction:column; gap:.6rem;
+  overflow:auto;
+  padding:1rem .75rem 1rem 1rem;
+  border-left:1px solid var(--line-soft);
+  background:transparent;
+  z-index:15;
 }
 
-/* =============== MOBILE =============== */
-@media (max-width: 900px){
-  .app{
-    height: auto;
-    padding-left: 1rem;        /* no reserved space on mobile */
-    padding-right: 1rem;
+/* Mobile: stack */
+@media (max-width:900px){
+  .app{height:auto;padding-left:1rem;padding-right:1rem}
+  .left,.sidepanel{
+    position:static;width:auto;height:auto;overflow:visible;border:0;padding:14px 0
   }
-  .left,
-  .sidepanel{
-    position: static;
-    width: auto;
-    height: auto;
-    overflow: visible;
-    border-right: 0;
-    border-left: 0;
-    padding: 14px 0;
-  }
-  .right{
-    height: auto;
-    overflow: visible;
-    padding: 0;
-  }
-  .boardWrap{
-    height: auto;
-    padding: 0;
-    overflow: visible;
-  }
+  .right{height:auto;overflow:visible;padding:0}
+  .boardWrap{height:auto;padding:0;overflow:visible}
 }
-
 
 /* =============== CARDS & BUTTONS =============== */
 .card{
@@ -166,6 +117,9 @@ header{
 .btn.warn{background:var(--warn);border-color:var(--warn);color:var(--btn-warn-fg)}
 .btn:disabled{opacity:.45;cursor:not-allowed;filter:grayscale(.2)}
 .btn.is-on{box-shadow:inset 0 0 0 2px var(--accent);background:var(--btn-on-bg);color:var(--btn-on-fg)}
+
+.actions{display:flex;justify-content:flex-end;gap:.5rem;margin-top:.6rem}
+.council{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
 
 /* =============== BOARD + TILES =============== */
 .board{
@@ -199,21 +153,8 @@ header{
   border-radius:18px;padding:14px;color:var(--ink);
 }
 
-/* =============== TEXT HELPERS =============== */
+/* =============== TEXT HELPERS / CHART =============== */
 .edge{color:var(--accent)}
 .hint{font-size:11px;color:var(--muted)}
 .log{max-height:240px;overflow:auto}
-
-/* =============== TRENDS CHART =============== */
-canvas#trend{
-  display:block;width:100%;height:180px;background:var(--trend-bg);
-  border:1px solid var(--trend-border);border-radius:10px;
-}
-
-/* =============== RESPONSIVE =============== */
-@media (max-width:900px){
-  .app{grid-template-columns:1fr;height:auto}
-  .left{position:static;height:auto;border-right:0}
-  .right{height:auto;padding:1rem 0}
-  .boardWrap{height:auto}
-}
+canvas#trend{display:block;width:100%;height:180px;background:var(--trend-bg);border:1px solid var(--trend-border);border-radius:10px}

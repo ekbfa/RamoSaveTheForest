@@ -55,8 +55,8 @@ header{
 /* =============== LAYOUT (fixed left & right) =============== */
 .app{
   height: calc(100vh - var(--header-h));
-  padding-left:  calc(var(--left-w);
-  padding-right: calc(var(--right-w);
+  padding-left:  calc(var(--left-w) + 0.5rem;
+  padding-right: calc(var(--right-w) + 0.5rem;
 }
 
 /* Left sidebar — fixed */

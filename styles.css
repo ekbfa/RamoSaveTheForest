@@ -159,3 +159,28 @@ header{
 .hint{font-size:11px;color:var(--muted)}
 .log{max-height:240px;overflow:auto}
 canvas#trend{display:block;width:100%;height:180px;background:var(--trend-bg);border:1px solid var(--trend-border);border-radius:10px}
+
+
+/* =============== SLIDERS =============== */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line-soft);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+}

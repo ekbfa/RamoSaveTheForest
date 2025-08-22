@@ -132,95 +132,63 @@ header {
 }
 
 /* =============== LAYOUT =============== */
-/* ====== outer grid: left (1/4) | right area (3/4) ====== */
-.app{
-  display:grid;
-  grid-template-columns: 1fr 3fr;              /* 1/4 | 3/4 */
+/* ====== outer grid: left (1/4) | board (3/4) ====== */
+.app {
+  display: grid;
+  grid-template-columns: 1fr 3fr;   /* 25% | 75% */
   gap: 1rem;
   height: calc(100vh - var(--header-h));
 }
 
-/* LEFT SIDEBAR (sticky) */
-.left{
+/* LEFT SIDEBAR (sticky if you want it fixed on scroll) */
+.left {
   background: var(--panel);
   padding: 14px;
   border-right: 1px solid var(--line-soft);
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
 
   position: sticky;
   top: var(--header-h);
   height: calc(100vh - var(--header-h));
   overflow: auto;
   align-self: start;
-  z-index: 10;
 }
 
-/* RIGHT AREA becomes a simple container */
-.right{
-  display:block;  /* no grid/flex needed here */
+/* RIGHT = board + summaries/log stacked */
+.right {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  overflow: auto;
   height: calc(100vh - var(--header-h));
 }
 
-/* ====== inner split INSIDE the right area ======
-   center (2/4) + right panel (1/4)
-   IMPORTANT: no overflow on this container or sticky will fail */
-.boardWrap{
-  display:grid;
-  grid-template-columns: 2fr 1fr;              /* center | right */
+/* Board stretches */
+.boardWrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
-  padding: 1rem;
-  align-items: start;
-  height: 100%;
-  overflow: visible;                            /* <-- allow sticky to work */
-}
-
-/* Center column (the board) can scroll independently */
-.board{
-  grid-column: 1;
-  max-width: 100%;
-  overflow: auto;                               /* board gets the scroll */
-  background: #F6FAF8;
-}
-
-/* Right column (summary/trends/log) — sticky */
-.sidepanel{
-  grid-column: 2;
-  position: sticky;
-  top: var(--header-h);
-  height: calc(100vh - var(--header-h) - 2rem); /* 2rem ≈ .boardWrap padding */
   overflow: auto;
-  padding-right: .5rem;                         /* avoid scrollbar overlap */
-  border-left: 1px solid var(--line-soft);
-  background: transparent;
-  z-index: 5;
 }
 
 /* Mobile: stack everything */
-@media (max-width: 900px){
-  .app{
+@media (max-width: 900px) {
+  .app {
     grid-template-columns: 1fr;
     height: auto;
   }
-  .left{
+  .left {
     position: static;
     height: auto;
     border-right: 0;
   }
-  .right{ height: auto; }
-  .boardWrap{
-    grid-template-columns: 1fr;
+  .right {
     height: auto;
-  }
-  .sidepanel{
-    position: static;
-    height: auto;
-    border-left: 0;
-    padding-right: 0;
+    padding: 1rem 0;
   }
 }
-
-
 
 /* =============== CARDS & BUTTONS =============== */
 .card {

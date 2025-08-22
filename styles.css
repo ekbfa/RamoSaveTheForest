@@ -147,7 +147,6 @@ header {
   border-right: 0;
   display: flex;
   flex-direction: column;
-  max-width: 400px;
 
   position: sticky;
   top: var(--header-h);

@@ -132,39 +132,57 @@ header {
 }
 
 /* =============== LAYOUT =============== */
-.app {
-  display: grid;
-  grid-template-columns: 1fr 380px; /* main | sidebar */
-  gap: 1rem;
+.app{
+  display:grid;
+  grid-template-columns: 1fr 3fr;              /* 1/4 | 3/4 */
+  gap:1rem;
+  height: calc(100vh - var(--header-h));
+}
+.left{
+  background: var(--panel);
+  padding:14px;
+  border-right: 1px solid var(--line-soft);
+  display:flex;
+  flex-direction:column;
+  overflow:auto;
+}
+.right{
+  display:grid;
+  grid-template-columns: 2fr 1fr;              /* center | right */
+  gap:1rem;
+  align-items:start;
+  height: calc(100vh - var(--header-h));
+}
+.boardWrap{
+  grid-column: 1;                               /* center */
+  display:flex;
+  gap:1rem;
+  padding:1rem;
+  overflow:auto;                                /* both axes */
   height: calc(100vh - var(--header-h));
 }
 
-/* Sidebar (now on the right, sticky) */
-.left {
-  background: var(--panel);
-  padding: 14px;
-  border-left: 1px solid var(--line-soft);
-  border-right: 0;
-  display: flex;
-  flex-direction: column;
-
+/* 4) Right column (summary/trends/log) = fixed/sticky 1/4 */
+.sidepanel{
+  grid-column: 2;                               /* right */
   position: sticky;
   top: var(--header-h);
-  height: calc(100vh - var(--header-h));
-  align-self: start;
-  overflow: auto;
-  z-index: 10;
+  height: calc(100vh - var(--header-h));        /* own scroll */
+  overflow:auto;
+  padding-right:.5rem;                          /* avoid scrollbar overlap */
+  border-left: 1px solid var(--line-soft);
+  background: transparent;                      /* cards handle their own bg */
+  z-index: 5;
 }
 
-.right { display: flex; flex-direction: column; }
-
-.boardWrap {
-  flex: 1;
-  display: flex;
-  gap: 1rem;
-  padding: 1rem;
-  overflow: auto;
+/* Mobile: stack everything */
+@media (max-width: 900px){
+  .app{ grid-template-columns: 1fr; height:auto; }
+  .right{ grid-template-columns: 1fr; height:auto; }
+  .boardWrap{ height:auto; }
+  .sidepanel{ position: static; height:auto; border-left:0; }
 }
+
 
 /* =============== CARDS & BUTTONS =============== */
 .card {

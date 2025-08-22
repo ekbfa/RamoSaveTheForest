@@ -120,6 +120,7 @@ header{
 
 .actions{display:flex;justify-content:flex-start;gap:.5rem;margin-top:.6rem}
 .council{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.tool-list{display:flex;flex-wrap: wrap; gap:.5rem; justify-content:flex-start;}
 
 /* =============== BOARD + TILES =============== */
 .board{

@@ -35,7 +35,7 @@
 html,body{height:100%}
 body{
   margin:0;background:var(--bg);color:var(--ink);
-  font:16px/1.5 "Nexa Bold",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font: 16px/1.5 "Inter", sans-serif;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
 }
 img{max-width:100%;height:auto;display:block}

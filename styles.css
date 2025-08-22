@@ -132,56 +132,94 @@ header {
 }
 
 /* =============== LAYOUT =============== */
+/* ====== outer grid: left (1/4) | right area (3/4) ====== */
 .app{
   display:grid;
   grid-template-columns: 1fr 3fr;              /* 1/4 | 3/4 */
-  gap:1rem;
-  height: calc(100vh - var(--header-h));
-}
-.left{
-  background: var(--panel);
-  padding:14px;
-  border-right: 1px solid var(--line-soft);
-  display:flex;
-  flex-direction:column;
-  overflow:auto;
-}
-.right{
-  display:grid;
-  grid-template-columns: 2fr 1fr;              /* center | right */
-  gap:1rem;
-  align-items:start;
-  height: calc(100vh - var(--header-h));
-}
-.boardWrap{
-  grid-column: 1;                               /* center */
-  display:flex;
-  gap:1rem;
-  padding:1rem;
-  overflow:auto;                                /* both axes */
+  gap: 1rem;
   height: calc(100vh - var(--header-h));
 }
 
-/* 4) Right column (summary/trends/log) = fixed/sticky 1/4 */
-.sidepanel{
-  grid-column: 2;                               /* right */
+/* LEFT SIDEBAR (sticky) */
+.left{
+  background: var(--panel);
+  padding: 14px;
+  border-right: 1px solid var(--line-soft);
+  display:flex;
+  flex-direction:column;
+
   position: sticky;
   top: var(--header-h);
-  height: calc(100vh - var(--header-h));        /* own scroll */
-  overflow:auto;
-  padding-right:.5rem;                          /* avoid scrollbar overlap */
+  height: calc(100vh - var(--header-h));
+  overflow: auto;
+  align-self: start;
+  z-index: 10;
+}
+
+/* RIGHT AREA becomes a simple container */
+.right{
+  display:block;  /* no grid/flex needed here */
+  height: calc(100vh - var(--header-h));
+}
+
+/* ====== inner split INSIDE the right area ======
+   center (2/4) + right panel (1/4)
+   IMPORTANT: no overflow on this container or sticky will fail */
+.boardWrap{
+  display:grid;
+  grid-template-columns: 2fr 1fr;              /* center | right */
+  gap: 1rem;
+  padding: 1rem;
+  align-items: start;
+  height: 100%;
+  overflow: visible;                            /* <-- allow sticky to work */
+}
+
+/* Center column (the board) can scroll independently */
+.board{
+  grid-column: 1;
+  max-width: 100%;
+  overflow: auto;                               /* board gets the scroll */
+  background: #F6FAF8;
+}
+
+/* Right column (summary/trends/log) — sticky */
+.sidepanel{
+  grid-column: 2;
+  position: sticky;
+  top: var(--header-h);
+  height: calc(100vh - var(--header-h) - 2rem); /* 2rem ≈ .boardWrap padding */
+  overflow: auto;
+  padding-right: .5rem;                         /* avoid scrollbar overlap */
   border-left: 1px solid var(--line-soft);
-  background: transparent;                      /* cards handle their own bg */
+  background: transparent;
   z-index: 5;
 }
 
 /* Mobile: stack everything */
 @media (max-width: 900px){
-  .app{ grid-template-columns: 1fr; height:auto; }
-  .right{ grid-template-columns: 1fr; height:auto; }
-  .boardWrap{ height:auto; }
-  .sidepanel{ position: static; height:auto; border-left:0; }
+  .app{
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .left{
+    position: static;
+    height: auto;
+    border-right: 0;
+  }
+  .right{ height: auto; }
+  .boardWrap{
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .sidepanel{
+    position: static;
+    height: auto;
+    border-left: 0;
+    padding-right: 0;
+  }
 }
+
 
 
 /* =============== CARDS & BUTTONS =============== */

@@ -1,4 +1,3 @@
-/* game.js — core game logic (no CSS/HTML) */
 (() => {
   'use strict';
 
